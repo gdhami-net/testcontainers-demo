@@ -6,12 +6,12 @@ using Xunit;
 namespace TestcontainersDemo;
 
 /// <summary>
-/// Serialization, acknowledgment, delivery — against RabbitMQ itself,
-/// not a List&lt;T&gt; pretending to be a queue.
+/// Payload round-trip, acknowledgment, delivery — through RabbitMQ
+/// itself, not a List&lt;T&gt; pretending to be a queue.
 /// </summary>
 public sealed class RabbitMqRoundTripTests : IAsyncLifetime
 {
-    private readonly RabbitMqContainer _rabbit = new RabbitMqBuilder("rabbitmq:3.11").Build();
+    private readonly RabbitMqContainer _rabbit = new RabbitMqBuilder("rabbitmq:4.3").Build();
 
     public async Task InitializeAsync() => await _rabbit.StartAsync();
 
@@ -24,7 +24,7 @@ public sealed class RabbitMqRoundTripTests : IAsyncLifetime
         await using var connection = await factory.CreateConnectionAsync();
         await using var channel = await connection.CreateChannelAsync();
 
-        await channel.QueueDeclareAsync("orders", durable: false, exclusive: false, autoDelete: true);
+        await channel.QueueDeclareAsync("orders", durable: false, exclusive: true, autoDelete: true);
         await channel.BasicPublishAsync(exchange: "", routingKey: "orders",
             body: Encoding.UTF8.GetBytes("order-42"));
 
