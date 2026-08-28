@@ -25,7 +25,7 @@ public sealed class SqlDialectTests : IAsyncLifetime
     public async Task DisposeAsync() => await _sql.DisposeAsync().AsTask();
 
     [Fact]
-    public async Task Sqlite_accepts_the_string_sql_server_truncates()
+    public async Task Sqlite_accepts_the_string_sql_server_rejects()
     {
         const string elevenChars = "abcdefghijk"; // one char too many for NVARCHAR(10)
 

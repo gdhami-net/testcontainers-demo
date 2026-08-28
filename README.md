@@ -20,7 +20,8 @@ dotnet test
 ```
 
 First run pulls the SQL Server and RabbitMQ images, so give it a few minutes;
-afterwards the suite starts in seconds. Containers are created and destroyed
-per test class — run it twice in parallel and they won't collide.
+afterwards the suite starts in seconds. Each test gets its own container —
+neither class uses a shared fixture — so run it twice in parallel and they
+won't collide.
 
 MIT licensed. Argue with it.
