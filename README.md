@@ -1,6 +1,6 @@
 # testcontainers-demo
 
-Companion repo for [Integration tests that lie](https://gdhami.net/blog/integration-tests-that-lie.html).
+Companion repo for [Testcontainers: run your tests against real SQL Server and RabbitMQ](https://gdhami.net/blog/testcontainers-run-your-tests-against-real-sql-server-and-rabbitmq).
 
 Two integration tests that run **real infrastructure** as throwaway Docker
 containers owned by the test run — no mocks, no shared environment:
